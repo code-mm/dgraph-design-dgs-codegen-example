@@ -1,0 +1,32 @@
+"""
+设备信息
+"""
+type DDevice{
+    """
+    设备ID
+    """
+    deviceId:ID
+    """
+    AndroidID
+    """
+    androidIds:[String] @search(by:[hash,trigram])
+    """
+    OAID
+    """
+    oaids:[String]  @search(by:[hash,trigram])
+    """
+    IMEI
+    """
+    imeis:[String]  @search(by:[hash,trigram])
+
+    """
+    OS
+    """
+    os:DOS
+}
+
+enum DOS{
+    ANDROID
+    IOS
+    HARMONY
+}

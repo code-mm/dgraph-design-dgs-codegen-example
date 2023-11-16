@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id "com.netflix.dgs.codegen" version "6.0.3"
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+
+    implementation('com.squareup.okhttp3:okhttp:5.0.0-alpha.11')
+    implementation 'com.squareup.okhttp3:okhttp-tls:5.0.0-alpha.11'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    implementation('com.google.code.gson:gson:2.10.1')
+    implementation 'org.json:json:20230227'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10'
+
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.1'
+
+    implementation 'joda-time:joda-time:2.12.5'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+generateJava {
+//    schemaPaths = ["${projectDir}/schema/dgraph"] // List of directories containing schema files
+//    schemaPaths = ["${projectDir}/tmp/schema1.graphqls"] // List of directories containing schema files
+    schemaPaths = ["${projectDir}/tmp/schema.graphqls"] // List of directories containing schema files
+    packageName = 'com.my.dgraph.types' // The package name to use to generate sources
+    generateClientv2 = true
+    typeMapping = [
+            DateTime     : "java.lang.String",
+            Date         : "java.time.LocalDate",
+            Time         : "java.time.OffsetTime",
+            URI          : "java.net.URI",
+            Object       : "java.lang.Object",
+            Url          : "java.lang.String",
+            PositiveFloat: "java.lang.Float",
+            PhoneNumber  : "java.lang.String",
+            Email        : "java.lang.String",
+            ID           : "java.lang.String",
+            Text         : "java.lang.String",
+            JSON         : "java.lang.Object",
+            Html         : "java.lang.String",
+            BigDecimal   : "java.math.BigDecimal",
+            Int64        : "java.lang.Long"
+    ]
+    language = 'java'
+}

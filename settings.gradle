@@ -1,0 +1,4 @@
+rootProject.name = 'dgraph-design-example'
+include 'sdk'
+include 'types'
+
